@@ -47,23 +47,38 @@ mode — not exclusive **Fullscreen**. In League:
 
 (Borderless looks identical to fullscreen but lets overlays show through.)
 
-## Running it
+## Get the app as a double-click .exe (no commands)
 
-You need [Node.js](https://nodejs.org) installed (v18+).
+You don't have to run anything in a terminal. Pick whichever is easier:
+
+### Option A — download the prebuilt .exe (easiest)
+
+GitHub builds the `.exe` for you automatically on every change.
+
+1. Go to the repo's **Releases** page → the **"Latest Windows build"** release.
+2. Download `LoL-Flash-Tracker-<version>.exe`.
+3. Double-click it. That's it — it's **portable**, so you can drop it on your
+   desktop and just double-click it before each game. No install, no Node.
+
+> The same file is also on the **Actions** tab: open the latest green
+> "Build Windows EXE" run → **Artifacts** → `LoL-Flash-Tracker-windows`.
+
+### Option B — build it yourself in one click
+
+If you have (or install) [Node.js](https://nodejs.org), just **double-click
+`build-exe.bat`**. It installs everything and produces the `.exe` in the `dist/`
+folder. You only do this once; after that you just run the `.exe`.
+
+## For developers (optional)
+
+Run from source, or build for other platforms:
 
 ```bash
 npm install
-npm start
-```
-
-## Building a standalone app
-
-This produces an installer/executable you can run without Node:
-
-```bash
-npm run dist        # builds for your current OS
-npm run dist:win    # Windows portable .exe
-npm run dist:mac    # macOS .dmg
+npm start            # run in dev
+npm run dist:win     # Windows portable .exe
+npm run dist:mac     # macOS .dmg
+npm run dist         # current OS
 ```
 
 Output lands in the `dist/` folder.
@@ -87,6 +102,8 @@ No game integration, no external services, no accounts.
 | `styles.css`   | Overlay styling (dark, translucent panel + icon states).     |
 | `renderer.js`  | Builds the role rows and runs the cooldown timers.            |
 | `assets/flash.png` | The official Flash summoner-spell icon (Riot Data Dragon). |
+| `build-exe.bat` | Double-click to build the `.exe` locally (one-time).         |
+| `.github/workflows/build-exe.yml` | Auto-builds the `.exe` on GitHub.          |
 
 ## Ideas to extend it
 

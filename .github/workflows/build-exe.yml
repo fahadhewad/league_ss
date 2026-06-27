@@ -1,0 +1,53 @@
+name: Build Windows EXE
+
+# Builds a standalone, portable .exe on GitHub's servers so you never have to
+# build locally. The finished .exe is attached to:
+#   - the workflow run (Actions tab -> the run -> "Artifacts"), and
+#   - a "latest" Release (repo home -> Releases) for a stable download link.
+on:
+  push:
+    branches:
+      - claude/lol-summoner-tracker-enbumo
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+  workflow_dispatch: {} # adds a manual "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write # needed to publish the Release
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build portable .exe
+        run: npm run dist:win
+
+      - name: Upload .exe as a build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LoL-Flash-Tracker-windows
+          path: dist/*.exe
+          if-no-files-found: error
+
+      - name: Publish to the "latest" Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Windows build
+          body: |
+            Standalone, portable LoL Flash Tracker for Windows.
+            Download the `.exe` below and double-click it — no install, no Node, no commands.
+          files: dist/*.exe
+          fail_on_unmatched_files: true

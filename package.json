@@ -33,7 +33,8 @@
       "assets/**/*"
     ],
     "win": {
-      "target": "portable"
+      "target": "portable",
+      "artifactName": "LoL-Flash-Tracker-${version}.${ext}"
     },
     "mac": {
       "target": "dmg",
