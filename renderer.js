@@ -6,8 +6,10 @@ const ROLES = ['TOP', 'JGL', 'MID', 'BOT', 'SUP'];
 const DEFAULT_CD = 300; // Flash base cooldown (seconds)
 const WARN_AT = 10; // seconds left when the timer starts pulsing red
 
-// Countdown ring geometry (matches the 52x52 button / r=22 in markup).
-const RING_R = 22;
+// Countdown ring geometry (matches the 40x40 button in markup).
+const RING_SIZE = 40;
+const RING_CENTER = RING_SIZE / 2;
+const RING_R = 17;
 const RING_C = 2 * Math.PI * RING_R;
 
 // Official Flash summoner-spell icon (assets/flash.png).
@@ -43,9 +45,9 @@ function buildRows() {
     row.innerHTML = `
       <span class="role">${role}</span>
       <button class="flash ready" aria-label="Flash ${role}">
-        <svg class="ring" viewBox="0 0 52 52">
-          <circle class="track" cx="26" cy="26" r="${RING_R}"></circle>
-          <circle class="progress" cx="26" cy="26" r="${RING_R}"
+        <svg class="ring" viewBox="0 0 ${RING_SIZE} ${RING_SIZE}">
+          <circle class="track" cx="${RING_CENTER}" cy="${RING_CENTER}" r="${RING_R}"></circle>
+          <circle class="progress" cx="${RING_CENTER}" cy="${RING_CENTER}" r="${RING_R}"
             stroke-dasharray="${RING_C.toFixed(2)}" stroke-dashoffset="${RING_C.toFixed(2)}"></circle>
         </svg>
         ${BOLT_IMG}
@@ -156,7 +158,24 @@ function wireWindowControls() {
   });
 }
 
+// ---- Auto-fit the window to exactly the content size ----
+let lastW = 0;
+let lastH = 0;
+function autoFit() {
+  const panel = document.getElementById('panel');
+  const m = 4; // panel margin (per side) from styles.css
+  const w = panel.offsetWidth + m * 2;
+  const h = panel.offsetHeight + m * 2;
+  if (Math.abs(w - lastW) <= 1 && Math.abs(h - lastH) <= 1) return;
+  lastW = w;
+  lastH = h;
+  window.overlay.resize(w, h);
+}
+
 // ---- Boot ----
 buildRows();
 wireSettings();
 wireWindowControls();
+
+new ResizeObserver(autoFit).observe(document.getElementById('panel'));
+autoFit();

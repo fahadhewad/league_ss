@@ -1,13 +1,10 @@
 :root {
-  --bg: rgba(8, 12, 20, 0.82);
-  --bg-row: rgba(255, 255, 255, 0.04);
-  --border: rgba(120, 170, 255, 0.18);
   --gold: #f0c060;
-  --gold-dim: #5a5040;
   --text: #e6ecf5;
-  --muted: #8b97aa;
+  --muted: #9aa6ba;
   --warn: #ff5a5a;
   --accent: #4aa3ff;
+  --disc: rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -26,116 +23,104 @@ body {
   overflow: hidden;
 }
 
+/* No panel box, no border, no shadow — just content. */
 #panel {
-  margin: 6px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
-  overflow: hidden;
+  margin: 4px;
+  width: max-content;
 }
 
-/* ---- Title bar ---- */
-#titlebar {
-  -webkit-app-region: drag; /* makes the whole window draggable by the header */
+/* ---- Tiny drag handle + controls ---- */
+#grip {
+  -webkit-app-region: drag; /* drag the window by this strip */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 10px;
-  background: linear-gradient(180deg, rgba(74, 163, 255, 0.16), rgba(74, 163, 255, 0));
-  border-bottom: 1px solid var(--border);
+  gap: 8px;
+  height: 15px;
+  margin-bottom: 2px;
   cursor: move;
 }
 
-.title {
+.handle {
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.4px;
+  line-height: 1;
   color: var(--muted);
+  opacity: 0.4;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .actions {
   -webkit-app-region: no-drag;
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 .actions button {
   -webkit-app-region: no-drag;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   display: grid;
   place-items: center;
   background: transparent;
   border: none;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  opacity: 0.55;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .actions button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.14);
   color: var(--text);
 }
 
 #close:hover {
-  background: rgba(255, 90, 90, 0.25);
+  background: rgba(255, 90, 90, 0.32);
   color: #fff;
 }
 
 /* ---- Settings drawer ---- */
 #settings {
-  padding: 10px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.25);
+  padding: 2px 0 6px;
 }
 
 #settings.hidden {
   display: none;
 }
 
-.cd-label {
-  display: block;
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
-.cd-label .hint {
-  opacity: 0.6;
-}
-
 .cd-row {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
 }
 
 #cdInput {
-  width: 56px;
-  padding: 5px 6px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  width: 100%;
+  padding: 3px;
+  background: var(--disc);
+  border: none;
+  border-radius: 5px;
   color: var(--text);
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
 }
 
 .presets {
   display: flex;
-  gap: 4px;
+  gap: 3px;
 }
 
 .preset {
-  padding: 4px 7px;
-  font-size: 11px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  flex: 1;
+  padding: 3px 0;
+  font-size: 10px;
+  background: var(--disc);
+  border: none;
+  border-radius: 5px;
   color: var(--muted);
   cursor: pointer;
 }
@@ -143,51 +128,40 @@ body {
 .preset:hover,
 .preset.active {
   color: var(--gold);
-  border-color: var(--gold);
-}
-
-.tip {
-  margin: 9px 0 0;
-  font-size: 10px;
-  color: var(--muted);
-  opacity: 0.75;
-  text-align: center;
 }
 
 /* ---- Role rows ---- */
 #rows {
-  padding: 6px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
 }
 
 .row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 5px 8px;
-  background: var(--bg-row);
-  border: 1px solid transparent;
-  border-radius: 9px;
+  gap: 5px;
 }
 
-.row .role {
-  flex: 1;
-  font-size: 13px;
+.role {
+  width: 24px;
+  text-align: right;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   color: var(--muted);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
 }
 
-/* The flash button */
+/* The flash button — circular disc + countdown ring */
 .flash {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: 40px;
+  height: 40px;
   padding: 0;
-  background: transparent;
+  background: var(--disc);
   border: none;
+  border-radius: 50%;
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -201,7 +175,7 @@ body {
 
 .flash .ring .track {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.08);
+  stroke: rgba(255, 255, 255, 0.1);
   stroke-width: 3;
 }
 
@@ -214,9 +188,9 @@ body {
 }
 
 .flash .bolt {
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   object-fit: cover;
   -webkit-user-drag: none;
   transition: filter 0.15s ease, opacity 0.15s ease;
@@ -227,20 +201,20 @@ body {
   inset: 0;
   display: none;
   place-items: center;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 
 /* States */
 .flash.ready .bolt {
-  filter: drop-shadow(0 0 5px rgba(240, 192, 96, 0.6));
+  filter: drop-shadow(0 0 4px rgba(240, 192, 96, 0.6));
 }
 
 .flash.cooldown .bolt {
-  filter: grayscale(1) brightness(0.55);
-  opacity: 0.5;
+  filter: grayscale(1) brightness(0.5);
+  opacity: 0.45;
 }
 
 .flash.cooldown .time {
@@ -265,10 +239,10 @@ body {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.08);
+    transform: scale(1.07);
   }
 }
 
 .flash.ready:hover .bolt {
-  filter: drop-shadow(0 0 7px rgba(240, 192, 96, 0.95));
+  filter: drop-shadow(0 0 6px rgba(240, 192, 96, 0.95));
 }

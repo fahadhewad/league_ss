@@ -9,23 +9,23 @@ memory reading. It's just a floating window with five buttons. You tap a bolt
 when you see an enemy flash; it counts down. That makes it completely safe to
 use under Riot's Terms of Service.
 
+A bare, frameless strip — no box, no borders. Just the five Flash icons with a
+tiny drag handle, and the window auto-shrinks to fit:
+
 ```
-┌──────────────────────┐
-│      ENEMY FLASH   ⚙ ×│
-├──────────────────────┤
-│  TOP            ⚡     │
-│  JGL            ⚡     │
-│  MID          (4:12)  │  ← on cooldown
-│  BOT            ⚡     │
-│  SUP            ⚡     │
-└──────────────────────┘
+        ⠇      ⚙ ×
+   TOP  (⚡)
+   JGL  (⚡)
+   MID  4:12     ← on cooldown (greyed, ring draining)
+   BOT  (⚡)
+   SUP  (⚡)
 ```
 
 ## How to use
 
 - **Left-click** a bolt → starts the 5:00 (300s) Flash cooldown for that role.
 - **Right-click** a bolt → resets it back to ready (in case you mistapped).
-- **Drag** the title bar to reposition the panel.
+- **Drag** the small ⠇ handle (top-left) to reposition the strip.
 - **Ctrl/Cmd + Shift + Space** → hide/show the whole overlay.
 - **⚙ (gear)** → change the cooldown. Presets:
   - `300` — base Flash

@@ -8,29 +8,25 @@
   </head>
   <body>
     <div id="panel">
-      <!-- Draggable header -->
-      <header id="titlebar">
-        <span class="title">ENEMY FLASH</span>
+      <!-- Tiny drag handle + controls -->
+      <div id="grip">
+        <span class="handle" title="Drag to move">&#10247;</span>
         <div class="actions">
           <button id="gear" title="Settings" aria-label="Settings">&#9881;</button>
-          <button id="close" title="Close (or Ctrl+Shift+Space to hide)" aria-label="Close">&times;</button>
+          <button id="close" title="Close (Ctrl+Shift+Space to hide)" aria-label="Close">&times;</button>
         </div>
-      </header>
+      </div>
 
       <!-- Settings drawer (collapsed by default) -->
       <section id="settings" class="hidden">
-        <label class="cd-label">Flash cooldown
-          <span class="hint">(seconds)</span>
-        </label>
         <div class="cd-row">
-          <input id="cdInput" type="number" min="1" max="600" step="1" />
+          <input id="cdInput" type="number" min="1" max="600" step="1" title="Flash cooldown (seconds)" />
           <div class="presets">
-            <button class="preset" data-cd="300" title="Base">300</button>
+            <button class="preset" data-cd="300" title="Base Flash">300</button>
             <button class="preset" data-cd="254" title="Cosmic Insight">254</button>
             <button class="preset" data-cd="234" title="Cosmic Insight + Lucidity boots">234</button>
           </div>
         </div>
-        <p class="tip">Left-click a bolt = start CD &middot; Right-click = reset</p>
       </section>
 
       <!-- Role rows get injected here -->

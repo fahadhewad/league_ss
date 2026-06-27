@@ -4,8 +4,10 @@ const path = require('path');
 // Single compact, transparent, always-on-top overlay window.
 let win = null;
 
-const WIN_WIDTH = 212;
-const WIN_HEIGHT = 392;
+// Small starting size; the renderer reports its real content size and the
+// window auto-shrinks to fit (see 'overlay:resize' below).
+const WIN_WIDTH = 84;
+const WIN_HEIGHT = 250;
 
 function createWindow() {
   const { workArea } = screen.getPrimaryDisplay();
@@ -64,6 +66,16 @@ ipcMain.on('overlay:close', () => {
 // Toggle click-through so the panel never blocks game clicks when "locked".
 ipcMain.on('overlay:clickthrough', (_event, enabled) => {
   if (win) win.setIgnoreMouseEvents(enabled, { forward: true });
+});
+
+// Shrink/grow the window to exactly fit the UI, staying docked to the right edge.
+ipcMain.on('overlay:resize', (_event, { w, h }) => {
+  if (!win) return;
+  const b = win.getBounds();
+  const right = b.x + b.width;
+  const width = Math.max(40, Math.round(w));
+  const height = Math.max(40, Math.round(h));
+  win.setBounds({ x: right - width, y: b.y, width, height });
 });
 
 app.on('window-all-closed', () => {
