@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+    <title>LoL Flash Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="panel">
+      <!-- Draggable header -->
+      <header id="titlebar">
+        <span class="title">ENEMY FLASH</span>
+        <div class="actions">
+          <button id="gear" title="Settings" aria-label="Settings">&#9881;</button>
+          <button id="close" title="Close (or Ctrl+Shift+Space to hide)" aria-label="Close">&times;</button>
+        </div>
+      </header>
+
+      <!-- Settings drawer (collapsed by default) -->
+      <section id="settings" class="hidden">
+        <label class="cd-label">Flash cooldown
+          <span class="hint">(seconds)</span>
+        </label>
+        <div class="cd-row">
+          <input id="cdInput" type="number" min="1" max="600" step="1" />
+          <div class="presets">
+            <button class="preset" data-cd="300" title="Base">300</button>
+            <button class="preset" data-cd="254" title="Cosmic Insight">254</button>
+            <button class="preset" data-cd="234" title="Cosmic Insight + Lucidity boots">234</button>
+          </div>
+        </div>
+        <p class="tip">Left-click a bolt = start CD &middot; Right-click = reset</p>
+      </section>
+
+      <!-- Role rows get injected here -->
+      <main id="rows"></main>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

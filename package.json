@@ -1,0 +1,46 @@
+{
+  "name": "lol-flash-tracker",
+  "version": "1.0.0",
+  "description": "Lightweight, always-on-top overlay to manually track enemy summoner spell (Flash) cooldowns in League of Legends. No game API used.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac"
+  },
+  "keywords": [
+    "league-of-legends",
+    "overlay",
+    "flash-tracker",
+    "electron"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.lolflashtracker.app",
+    "productName": "LoL Flash Tracker",
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "styles.css",
+      "renderer.js",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.games"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

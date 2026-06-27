@@ -1,0 +1,274 @@
+:root {
+  --bg: rgba(8, 12, 20, 0.82);
+  --bg-row: rgba(255, 255, 255, 0.04);
+  --border: rgba(120, 170, 255, 0.18);
+  --gold: #f0c060;
+  --gold-dim: #5a5040;
+  --text: #e6ecf5;
+  --muted: #8b97aa;
+  --warn: #ff5a5a;
+  --accent: #4aa3ff;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  overflow: hidden;
+}
+
+#panel {
+  margin: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+/* ---- Title bar ---- */
+#titlebar {
+  -webkit-app-region: drag; /* makes the whole window draggable by the header */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: linear-gradient(180deg, rgba(74, 163, 255, 0.16), rgba(74, 163, 255, 0));
+  border-bottom: 1px solid var(--border);
+  cursor: move;
+}
+
+.title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: var(--muted);
+}
+
+.actions {
+  -webkit-app-region: no-drag;
+  display: flex;
+  gap: 4px;
+}
+
+.actions button {
+  -webkit-app-region: no-drag;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+#close:hover {
+  background: rgba(255, 90, 90, 0.25);
+  color: #fff;
+}
+
+/* ---- Settings drawer ---- */
+#settings {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+#settings.hidden {
+  display: none;
+}
+
+.cd-label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.cd-label .hint {
+  opacity: 0.6;
+}
+
+.cd-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#cdInput {
+  width: 56px;
+  padding: 5px 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  text-align: center;
+}
+
+.presets {
+  display: flex;
+  gap: 4px;
+}
+
+.preset {
+  padding: 4px 7px;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.preset:hover,
+.preset.active {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.tip {
+  margin: 9px 0 0;
+  font-size: 10px;
+  color: var(--muted);
+  opacity: 0.75;
+  text-align: center;
+}
+
+/* ---- Role rows ---- */
+#rows {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  background: var(--bg-row);
+  border: 1px solid transparent;
+  border-radius: 9px;
+}
+
+.row .role {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+/* The flash button */
+.flash {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.flash .ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.flash .ring .track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 3;
+}
+
+.flash .ring .progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.25s linear;
+}
+
+.flash .bolt {
+  width: 26px;
+  height: 26px;
+  fill: var(--gold);
+  filter: drop-shadow(0 0 4px rgba(240, 192, 96, 0.55));
+  transition: fill 0.15s ease, filter 0.15s ease;
+}
+
+.flash .time {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* States */
+.flash.ready .bolt {
+  fill: var(--gold);
+}
+
+.flash.cooldown .bolt {
+  fill: var(--gold-dim);
+  filter: none;
+  opacity: 0.45;
+}
+
+.flash.cooldown .time {
+  display: grid;
+}
+
+.flash.warn .progress {
+  stroke: var(--warn);
+}
+
+.flash.warn .time {
+  color: var(--warn);
+}
+
+.flash.warn {
+  animation: pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.flash:hover .bolt {
+  filter: drop-shadow(0 0 6px rgba(240, 192, 96, 0.9));
+}
