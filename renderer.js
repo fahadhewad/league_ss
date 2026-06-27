@@ -10,10 +10,9 @@ const WARN_AT = 10; // seconds left when the timer starts pulsing red
 const RING_R = 22;
 const RING_C = 2 * Math.PI * RING_R;
 
-// Lightning-bolt SVG used for the Flash icon.
-const BOLT_SVG =
-  '<svg class="bolt" viewBox="0 0 24 24" aria-hidden="true">' +
-  '<path d="M13 2L4.6 13.5H10.4L8.6 22L19.4 9.8H12.9L13 2Z"/></svg>';
+// Official Flash summoner-spell icon (assets/flash.png).
+const BOLT_IMG =
+  '<img class="bolt" src="assets/flash.png" alt="Flash" draggable="false" />';
 
 let flashCd = clampCd(Number(localStorage.getItem('flashCd')) || DEFAULT_CD);
 
@@ -49,7 +48,7 @@ function buildRows() {
           <circle class="progress" cx="26" cy="26" r="${RING_R}"
             stroke-dasharray="${RING_C.toFixed(2)}" stroke-dashoffset="${RING_C.toFixed(2)}"></circle>
         </svg>
-        ${BOLT_SVG}
+        ${BOLT_IMG}
         <span class="time"></span>
       </button>`;
 

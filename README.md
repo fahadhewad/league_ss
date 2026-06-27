@@ -84,8 +84,9 @@ No game integration, no external services, no accounts.
 | `main.js`      | Electron main process — creates the overlay window + hotkeys. |
 | `preload.js`   | Secure bridge exposing window controls to the UI.             |
 | `index.html`   | Panel markup.                                                  |
-| `styles.css`   | Overlay styling (dark, translucent, gold bolts).              |
+| `styles.css`   | Overlay styling (dark, translucent panel + icon states).     |
 | `renderer.js`  | Builds the role rows and runs the cooldown timers.            |
+| `assets/flash.png` | The official Flash summoner-spell icon (Riot Data Dragon). |
 
 ## Ideas to extend it
 

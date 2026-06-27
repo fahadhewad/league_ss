@@ -214,11 +214,12 @@ body {
 }
 
 .flash .bolt {
-  width: 26px;
-  height: 26px;
-  fill: var(--gold);
-  filter: drop-shadow(0 0 4px rgba(240, 192, 96, 0.55));
-  transition: fill 0.15s ease, filter 0.15s ease;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  object-fit: cover;
+  -webkit-user-drag: none;
+  transition: filter 0.15s ease, opacity 0.15s ease;
 }
 
 .flash .time {
@@ -234,13 +235,12 @@ body {
 
 /* States */
 .flash.ready .bolt {
-  fill: var(--gold);
+  filter: drop-shadow(0 0 5px rgba(240, 192, 96, 0.6));
 }
 
 .flash.cooldown .bolt {
-  fill: var(--gold-dim);
-  filter: none;
-  opacity: 0.45;
+  filter: grayscale(1) brightness(0.55);
+  opacity: 0.5;
 }
 
 .flash.cooldown .time {
@@ -269,6 +269,6 @@ body {
   }
 }
 
-.flash:hover .bolt {
-  filter: drop-shadow(0 0 6px rgba(240, 192, 96, 0.9));
+.flash.ready:hover .bolt {
+  filter: drop-shadow(0 0 7px rgba(240, 192, 96, 0.95));
 }
